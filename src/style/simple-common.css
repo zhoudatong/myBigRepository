@@ -1,0 +1,15 @@
+.sub-bottom{
+    width: 100px;
+    height: 40px;
+    line-height: 30px;
+    border-radius: 4px;
+    margin: 30px;
+    text-align: center;
+    background-color: #409EFF;
+    color: #FFF;
+}
+.h1-title{
+    text-align: center;
+    font-weight: 700;
+    font-size: 18px;
+}

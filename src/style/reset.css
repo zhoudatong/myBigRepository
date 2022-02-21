@@ -1,0 +1,96 @@
+/*
+* @description [reset css]
+* @author zhoudatong
+* date 2022-1-11
+*/
+
+
+/*声明该css文件使用utf-8编码，浏览utf-8编码的任何网页，无论是中文，日文，韩文，都可以正常显示*/
+@charset "UTF-8";
+
+body,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+textarea,
+p,
+blockquote,
+th,
+td,
+hr,
+button,
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+iframe {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    /*设置font-size: 100%;  可以继承父元素字体大小*/
+    font: inherit;
+    /*父元素继承样式*/
+    font-family: "Microsoft Yahei", "微软雅黑", "宋体";
+    /*font-family设置多个属性，即电脑未安装第一种字体，则执行第二种字体，以此类推*/
+    vertical-align: baseline;
+    outline: none;
+    /* -user-select: none; */
+    /*控制文字不能被选中*/
+}
+
+input,
+span {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    font-family: "Microsoft Yahei", "微软雅黑", "宋体";
+    vertical-align: baseline;
+    outline: none;
+    background: transparent;
+    /* -user-select: text; */
+    /*可以选择文本*/
+}
+ol,ul {
+    list-style:none;
+}
+i {
+    font-style: normal;
+}
+.clearfix:before, .clearfix:after {
+    content: '\0020';
+    display: block;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    width: 100%;
+}
+.clearfix:after{
+    clear: both;
+}
+.clearfix {
+    *zoom: 1
+}
