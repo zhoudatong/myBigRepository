@@ -19,16 +19,16 @@
       <form>
         <div class="input-box">
           <label>{{$t("login.username")}}</label>
-          <input type="text" id="loginUserName" v-model="username" autocomplete="off" @keyup.enter.native="dealLogin"/>
+          <el-input type="text" id="loginUserName" v-model="username" auto-complete="off" @keyup.enter.native="dealLogin"></el-input>
         </div>
         <div class="input-box">
           <label>{{$t("login.password")}}</label>
-          <input type="password" id="loginPassword" v-model="password" autocomplete="off" @keyup.enter.native="dealLogin"/>
+          <el-input type="password" id="loginPassword" v-model="password" auto-complete="off" @keyup.enter.native="dealLogin"></el-input>
         </div>
         <div class="remenber-me">
           <el-checkbox checked v-model="checked" >{{$t("login.rememberpwd")}}</el-checkbox>
         </div>
-        <button class="sub-bottom" @keyup.enter.native="dealLogin" @click.enter="dealLogin">{{$t("login.submit")}}</button>
+        <button class="sub-bottom"  @click.enter="dealLogin">{{$t("login.submit")}}</button>
         <!-- <el-button type="primary" popper-class="sub-bottom" :popper-append-to-body="false">Submit</el-button> -->
       </form>
     </div>
@@ -43,12 +43,15 @@ import locale from "element-ui/lib/locale";
 import en from "element-ui/lib/locale/lang/en";
 import zh from "element-ui/lib/locale/lang/zh-CN";
 import Validator from "@/base/common/validator";
+import Common from "@/base/common/common";
 export default {
   data() {
     return {
       curSelectLang: DEFAULT_LANG,
       username:"",
       password:"",
+      newPassword:"",
+      checked:''
     };
   },
   mounted() {
@@ -77,45 +80,52 @@ export default {
       }
     },
     //表单验证
-    validataFunc(){
-      const validator = new Validator.validator();//创建一个创建一个validator对象
-      //添加一些校验规则
-      validator.add(document.getElementById("loginUserName"),[
+     validataFunc() {
+      // eslint-disable-next-line new-cap
+      const validator = new Validator.validator(); // 创建一个validator对象
+      /** ***********添加一些校验规则****************/
+      validator.add(document.getElementById("loginUserName"), [
+        { strategy: "isNonEmpty", errorMsg: this.$t("login.nameIsNotEmpty") },
+        {
+          strategy: "maxLength:10",
+          errorMsg: this.$t("login.nameLengthLimit"),
+        },
+      ]);
+      validator.add(document.getElementById("loginPassword"), [
         {
           strategy: "isNonEmpty",
-          errorMsg: this.$t("login.nameIsNotEmpty")
-        }
-      ]);
-      validator.add(document.getElementById("loginPassword"),[
-        {        
-          strategy: "isNonEmpty",
-          errorMsg: this.$t("login.passwordLengthLimit")
+          errorMsg: this.$t("login.passwordIsNotEmpty"),
         },
         {
           strategy: "minLength:6",
           errorMsg: this.$t("login.passwordLengthLimit"),
         },
         {
-           strategy: "maxLength:18",
+          strategy: "maxLength:18",
           errorMsg: this.$t("login.passwordLengthMax"),
-        }
+        },
       ]);
-     
-      return validator.start()
+
+      return validator.start(); // 返回校验结果
     },
 
     //处理登录
     dealLogin() {
-    const errorMsg = this.validataFunc();
-    if(errorMsg) {
-       this.$message({
-          type: "error",
-          showClose: true,
-          duration: "1500",
-          message: errorMsg.errorMsg,
-        });
-        return; // 阻止提交表单
-    }
+      const errorMsg = this.validataFunc();
+      if(errorMsg) {
+        this.$message({
+            type: "error",
+            showClose: true,
+            duration: "1500",
+            message: errorMsg.errorMsg,
+          });
+          return; // 阻止提交表单
+      }
+      loginFactory.dealLogin(
+        Common.trim(this.username),
+        Common.trim(this,this.password),
+      )
+      localStorage.setItem("newpassword", this.password)
     }
   },
   computed: {
@@ -179,14 +189,20 @@ export default {
              border-bottom: 1px solid #fff;
              display: flex;
              margin-top: 10px;
-            input{
+            .el-input{
                width: 100%;
                float: right;
                flex: 7;
                font-size: 14px;
                caret-color: #fff;
                color: #fff;
-               
+               background: transparent;
+               input{
+                 background: transparent;
+                 border: none;
+                 color: #fff;
+                 caret-color: #fff;
+               }
             }
             label{
               flex: 3;
