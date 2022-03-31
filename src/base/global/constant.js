@@ -1,7 +1,10 @@
+// import result from "../common/common"
 export const DEFAULT_LANG = 'chinese';
 
-
+export const DEV_HOST = 'http://192.168.129.42/';
 export const REMEMBER_PASSWORD = "**********";
+
+export const HOST = process.env.NODE_ENV === 'development'? DEV_HOST :  window.location.origin + '/';
 
 /**
  * localstorage存储关键字
@@ -21,5 +24,5 @@ export const ERRCODE = {
 }
 
 export const SERVER_ERRCODE = {
-    
+
 }

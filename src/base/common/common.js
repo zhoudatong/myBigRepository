@@ -5,5 +5,6 @@ var result = (function(scope) {
     scope.trim = (str) =>{
         return str.replace(/(^\s*)|(\s*$)/g, "")
     }
-})
+    return scope;
+})({})
 export default result;

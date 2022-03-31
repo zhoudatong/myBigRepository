@@ -24,6 +24,7 @@ console.log(localStorageFunc,'111');
 console.log(LOCAL_STORAGE.INFOR,'222');
 console.log(login,'44');
 var result = (function (scope) {
+    
 
     /**
      * 登录处理
@@ -31,11 +32,12 @@ var result = (function (scope) {
      * @param {string} pwd
      */
     scope.dealLogin = (user, pwd) => {
+        var data;
         let userInfor = localStorageFunc.getStorage(LOCAL_STORAGE.INFOR);
         if (!!userInfor && pwd === REMEMBER_PASSWORD && user === userInfor.username) {
-            var data = userInfor;
+            data = userInfor;
         } else {
-            var data = {
+            data = {
                 username: user,
                 passwd: md5(`${user}&${pwd}`)
             }
@@ -66,5 +68,6 @@ var result = (function (scope) {
         })
 
     }
+    return scope
 })({})
 export default result;

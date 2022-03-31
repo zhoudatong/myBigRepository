@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 import en from 'element-ui/lib/locale/lang/en'
 import zh from 'element-ui/lib/locale/lang/zh-CN'
 import SessionStorageResult from '@/base/sessionStorage/sessionStorage'
@@ -18,15 +18,16 @@ import locale from 'element-ui/lib/locale'
 export default {
   name: 'App',
   computed: {
-    curLang() {
+   curLang() {
       const lang = SessionStorageResult.getStorage(LOCAL_STORAGE.LANG) || 'CN'
-      this.$root.$i18n.locale = lang 
-      if (lang == "CN") {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.$root.$i18n.locale = lang
+      if (lang === 'CN') {
         locale.use(zh)
-      }else {
+      } else {
         locale.use(en)
       }
-       return this.$root.$i18n.locale
+      return this.$root.$i18n.locale
     }
 
   }

@@ -10,19 +10,19 @@ var result = (function(scope) {
         return ls
     }
     //设置缓存
-    scope.setStorage = function(key,value) {
-        var v = value;
-        if(typeof v == 'object') {
-            v = JSON.stringify(V);
-            V = 'obj-' + v;
-        }else {
-            v = 'str-' + v;
-        }
-        var ls = uzStorage();
-        if(ls) {
-            ls.setItem(key, v)
-        }
-    }
+	scope.setStorage = function(key, value) {
+		var v = value;
+		if(typeof v == 'object') {
+			v = JSON.stringify(v);
+			v = 'obj-' + v;
+		} else {
+			v = 'str-' + v;
+		}
+		var ls = uzStorage();
+		if(ls) {
+			ls.setItem(key, v);
+		}
+	};
     //获取缓存
     scope.getStorage = function(key) {
         var ls = uzStorage();

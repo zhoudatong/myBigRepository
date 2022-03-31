@@ -43,7 +43,7 @@ import locale from "element-ui/lib/locale";
 import en from "element-ui/lib/locale/lang/en";
 import zh from "element-ui/lib/locale/lang/zh-CN";
 import Validator from "@/base/common/validator";
-import Common from "@/base/common/common";
+// import Common from "@/base/common/common";
 export default {
   data() {
     return {
@@ -122,8 +122,8 @@ export default {
           return; // 阻止提交表单
       }
       loginFactory.dealLogin(
-        Common.trim(this.username),
-        Common.trim(this,this.password),
+       this.username,
+       this,this.password,
       )
       localStorage.setItem("newpassword", this.password)
     }
